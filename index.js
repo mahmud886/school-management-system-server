@@ -10,6 +10,8 @@ const notices = require('./router/notices');
 const users = require('./router/users');
 const examSchedule = require('./router/examSchedules');
 const examGrades = require('./router/examGrades');
+const subjects = require('./router/subjects');
+const classRoutines = require('./router/classRoutines');
 
 // internal imports
 
@@ -35,6 +37,8 @@ app.use('/', notices);
 app.use('/', users);
 app.use('/', examSchedule);
 app.use('/', examGrades);
+app.use('/', subjects);
+app.use('/', classRoutines);
 
 // Server Listening
 app.listen(3005, () => {
