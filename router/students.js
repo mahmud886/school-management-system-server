@@ -9,7 +9,7 @@ const studentSchema = require('../schemas/studentSchema');
 const Student = new mongoose.model('Student', studentSchema);
 
 // Post
-router.post('/admission-form', async (req, res) => {
+router.post('/add-student', async (req, res) => {
     try {
         const newStudent = new Student(req.body);
         await newStudent.save();
@@ -19,7 +19,7 @@ router.post('/admission-form', async (req, res) => {
     }
 });
 // get
-router.get('/studentDetails', async (req, res) => {
+router.get('/all-students', async (req, res) => {
     Student.find({}, (err, result) => {
         if (err) {
             res.send(err);
@@ -30,13 +30,25 @@ router.get('/studentDetails', async (req, res) => {
 });
 
 // Update
+router.put('/update-student/:id', async (req, res) => {
+    const updatedStudent = new Student({});
+    Student.updatedOne({ _id: req.params.id }, updatedStudent)
+        .then(() => {
+            res.status(201).json({
+                message: 'Student Updated Successfully!',
+            });
+        })
+        .catch((error) => {
+            res.status(400).json({
+                error: error,
+            });
+        });
+});
 
-// Delete
 // delete
 
-router.delete('/student/:id', async (req, res) => {
-    const id = req.params._id;
-    Student.deleteOne(id, (err) => {
+router.delete('/delete-student/:id', async (req, res) => {
+    Student.findOneAndRemove({ _id: req.params.id }, (err) => {
         if (err) {
             res.status(500).json({
                 error: 'There was a server side error!',

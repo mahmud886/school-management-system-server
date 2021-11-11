@@ -12,6 +12,7 @@ const examSchedule = require('./router/examSchedules');
 const examGrades = require('./router/examGrades');
 const subjects = require('./router/subjects');
 const classRoutines = require('./router/classRoutines');
+const allBooks = require('./router/allBooks');
 
 // internal imports
 
@@ -39,6 +40,7 @@ app.use('/', examSchedule);
 app.use('/', examGrades);
 app.use('/', subjects);
 app.use('/', classRoutines);
+app.use('/', allBooks);
 
 // Server Listening
 app.listen(3005, () => {

@@ -29,6 +29,24 @@ router.get('/all-users', async (req, res) => {
         }
     });
 });
+
+// Update
+router.put('/update-user/:id', async (req, res) => {
+    const updatedUser = new User({});
+
+    User.updateOne({ _id: req.params.id }, updatedUser)
+        .then(() => {
+            res.status(201).json({
+                message: 'User updated successfully!',
+            });
+        })
+        .catch((error) => {
+            res.status(400).json({
+                error: error,
+            });
+        });
+});
+
 // Delete
 router.delete('/delete-user/:id', async (req, res) => {
     User.deleteOne({ _id: req.params.id }, (err) => {
